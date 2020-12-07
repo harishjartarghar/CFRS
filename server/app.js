@@ -17,25 +17,18 @@ require('dotenv').config({
 });
 
 
-// Connect to database
-//connectDB();
+//Connect to database
+connectDB();
+
+ app.use(cors())
+ app.use(morgan('dev'))
 
 
 
 
-
-// Dev Logginf Middleware
-if (process.env.NODE_ENV === 'development') {
-    app.use(cors())
-    app.use(morgan('dev'))
-}
-
-app.get("/",(req,res)=>{
-	return res.json({"message":"Hello Wordl!"});
-})
 
 // Use Routes
-// app.use('/api/auth',require('./routes/auth.routes'));
+ app.use('/api/auth',require('./routes/auth.routes'));
 // app.use('/api/admin',require('./routes/admin.routes'));
 // app.use('/api/',require('./routes/index.routes'));
 
@@ -43,7 +36,7 @@ app.get("/",(req,res)=>{
 
 
 //starting the server at specified port
-const port=3000;
+const port=8080;
 app.listen(port,()=>{
     console.log(`Server running at port ${port}`.brightYellow.underline);
 })
