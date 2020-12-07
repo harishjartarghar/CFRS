@@ -1,25 +1,54 @@
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+// import NavBar from './components/layouts/NavBar';
+import {Route, Switch, Redirect} from 'react-router-dom';
+import Home from './containers/Home';
+import Login from './containers/Login';
+import Student from './containers/Student';
+import Teacher from './containers/Teacher';
+import { connect } from 'react-redux';
+import { CHECK_AUTH } from './redux/actions/authActions';
+import SnackBar from './components/snackbar';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+
+
+class App extends Component {
+ 
+
+componentDidMount()
+{
+  this.props.Check_Auth();
 }
 
-export default App;
+
+  render(){
+    
+  return (
+      <div className="App">
+        <SnackBar/>
+        <Switch>
+           <Route exact path="/" component={Home} />
+           <Route exact path="/login" component={Login} />
+           <Route exact path="/student/signup" component={Student} />
+           <Route exact path="/teacher/signup" component={Teacher} />
+           <Redirect to="/"/>
+        </Switch>
+       
+       
+      </div>
+  );
+  }
+}
+
+
+
+const mapDispatchToProps=(dispatch)=>{
+  return {
+    Check_Auth:()=>{dispatch(CHECK_AUTH())}
+  }
+}
+
+
+
+export default connect(null,mapDispatchToProps)(App);

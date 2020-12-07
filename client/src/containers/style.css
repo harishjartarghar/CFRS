@@ -1,0 +1,17 @@
+.login{
+
+/*	background-image: url('https://onlinepithoragarh.in/wp-content/uploads/2018/04/Kalpasi-Medical-Store-Pithoragarh-1.jpeg');
+	background-size: cover;*/
+	background: url("https://www.sauder.ubc.ca/sites/default/files/dynamic_styles/scale/750/public/2019-04/MBAN-Hero-Image-2000x750.jpg")  ;
+	background-repeat: no-repeat;
+	background-size: cover;
+	 height: 100%;
+}
+
+.Container{
+height: 100%;
+display: flex;
+align-items: center;
+text-align: center;
+
+}
