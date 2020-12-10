@@ -10,13 +10,14 @@ export const signUp=(NewUser,props)=>{
 
                  localStorage.setItem("jwt",res.data.token);
                 localStorage.setItem("user",JSON.stringify(res.data.newUser));
+                props.history.push('/dashboard');
+                dispatch({type:'SIGNUP_SUCCESS',...res});
                setTimeout(()=>{
             dispatch({
                 type:"HIDE_SNACKBAR"
             })
         },2000)
-                props.history.push('/dashboard');
-                dispatch({type:'SIGNUP_SUCCESS',...res});
+                
                 
             })
             .catch(error=>{
@@ -39,6 +40,11 @@ export const Login=(UserCredentials,props)=>{
     return (dispatch,getState)=>{
             axios.post(BASE_URL+'/auth/signin',UserCredentials,{headers:{'Content-Type': 'application/json'}})
             .then(res=>{
+                localStorage.setItem("jwt",res.data.token);
+                localStorage.setItem("user",JSON.stringify(res.data.user));
+
+                props.history.push('/dashboard');
+                dispatch({type:'LOGIN_SUCCESS',...res.data});
                   dispatch({type:'SHOW_SNACKBAR',snackbar:true,message:"LOGIN SUCCUESS",snackbarType:"success"});
                setTimeout(()=>{
             dispatch({
@@ -46,11 +52,7 @@ export const Login=(UserCredentials,props)=>{
             })
         },2000)
                 
-                localStorage.setItem("jwt",res.data.token);
-                localStorage.setItem("user",JSON.stringify(res.data.user));
-
-                props.history.push('/dashboard');
-                dispatch({type:'LOGIN_SUCCESS',...res.data});
+                
             })
             .catch(error=>{
                 console.log(error);
