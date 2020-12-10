@@ -12,6 +12,7 @@ const authReducers=(state={...initialState},actions)=>{
                 user:actions.user,
                 token:actions.token,
                 isAuthenticated:true,
+                isTeacher:actions.user.isTeacher
             }
         case 'LOGGED_IN':
             return{
@@ -19,6 +20,8 @@ const authReducers=(state={...initialState},actions)=>{
                 user:actions.user,
                 token:actions.token,
                 isAuthenticated:true,
+                isTeacher:actions.user.isTeacher
+                
             }
 
         case 'SIGNOUT':

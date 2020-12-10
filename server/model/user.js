@@ -10,7 +10,13 @@ const UserSchema=mongoose.Schema({
     branch:String,
     password:String,
     isTeacher:Boolean,
-    type:String   
+    type:String,
+    course:[
+    {
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Course"
+    }
+    ]   
 });
 
 const User=mongoose.model('User',UserSchema);

@@ -81,6 +81,11 @@ const onSubmit = async (e)=>{
   	props.LOGIN(formData,props);
 }
 
+  if(localStorage.getItem("jwt"))
+    {
+        props.history.push("/dashboard");
+    }
+
 
   return (
   	<div className="login">
