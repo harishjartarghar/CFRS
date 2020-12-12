@@ -135,5 +135,109 @@ export const JOIN=(id,props)=>{
 
 
 
+export const NEW_REVIEW=(code,question)=>{
+    return (dispatch,getState)=>{
+        axios.post(BASE_URL+'/review',{code,question},{headers:{'Content-Type': 'application/json','token':localStorage.getItem("jwt")}})
+            .then(res=>{
+               dispatch({type:'SHOW_SNACKBAR',snackbar:true,message:"REVIEW CREATED!",snackbarType:"success"});
+               setTimeout(()=>{
+            dispatch({
+                type:"HIDE_SNACKBAR"
+            })
+        },2000)
+                 dispatch({type:'NEW_REVIEW',review:res.data});
+            })
+            .catch(error=>{
+                console.log(error);
+                dispatch({type:'SHOW_SNACKBAR',snackbar:true,message:error.response.data.message,snackbarType:"error"});
+               setTimeout(()=>{
+            dispatch({
+                type:"HIDE_SNACKBAR"
+            })
+        },2000)
+            });
+    }
+}
+
+
+export const REVIEW_SUBMIT=(review,code)=>{
+    return (dispatch,getState)=>{
+        axios.post(BASE_URL+'/student_review',{review,code},{headers:{'Content-Type': 'application/json','token':localStorage.getItem("jwt")}})
+            .then(res=>{
+               dispatch({type:'SHOW_SNACKBAR',snackbar:true,message:"REVIEW SUBMITTED!",snackbarType:"success"});
+               setTimeout(()=>{
+            dispatch({
+                type:"HIDE_SNACKBAR"
+            })
+        },2000)
+                 dispatch({type:'REVIEW_SUBMIT'});
+            })
+            .catch(error=>{
+                console.log(error);
+                dispatch({type:'SHOW_SNACKBAR',snackbar:true,message:error.response.data.message,snackbarType:"error"});
+               setTimeout(()=>{
+            dispatch({
+                type:"HIDE_SNACKBAR"
+            })
+        },2000)
+            });
+    }
+}
+
+
+
+export const GET_REVIEW=(code,isTeacher)=>{
+    return (dispatch,getState)=>{
+        var url;
+        if(isTeacher)
+            url=BASE_URL+'/review?code='+code;
+        else
+            url=BASE_URL+'/student_review?code='+code;
+        axios.get(url,{headers:{'Content-Type': 'application/json','token':localStorage.getItem("jwt")}})
+            .then(res=>{
+                if(isTeacher)
+                {
+                    var list=res.data.filter(item=>item.course!==null);
+                    dispatch({type:'GET_REVIEW',review:list,submission:[]});
+                }
+                else
+                {
+                    dispatch({type:'GET_REVIEW',review:res.data.review,submission:res.data.submission});
+                }
+            })
+            .catch(error=>{
+                console.log(error);
+                dispatch({type:'SHOW_SNACKBAR',snackbar:true,message:error.response.data.message,snackbarType:"error"});
+               setTimeout(()=>{
+            dispatch({
+                type:"HIDE_SNACKBAR"
+            })
+        },2000)
+            });
+    }
+}
+
+
+
+export const GET_DATA=(id)=>{
+    return (dispatch,getState)=>{
+        axios.get(BASE_URL+'/data?id='+id,{headers:{'Content-Type': 'application/json','token':localStorage.getItem("jwt")}})
+            .then(res=>{
+                dispatch({type:'GET_DATA',data:res.data});
+            })
+            .catch(error=>{
+                console.log(error);
+                dispatch({type:'SHOW_SNACKBAR',snackbar:true,message:error.response.data.message,snackbarType:"error"});
+               setTimeout(()=>{
+            dispatch({
+                type:"HIDE_SNACKBAR"
+            })
+        },2000)
+            });
+    }
+}
+
+
+
 
 

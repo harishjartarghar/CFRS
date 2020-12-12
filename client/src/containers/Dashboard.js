@@ -9,6 +9,7 @@ import clsx from 'clsx';
 import { connect } from 'react-redux';
 import NewCourse from '../components/newCourse';
 import Reviews from '../views/Reviews';
+import Graph from '../views/Graph';
 
 
 const drawerWidth = 240;
@@ -106,8 +107,15 @@ function Dashboard(props) {
               );
             })}
              <Route
-                  path="/dashboard/:id"
+             exact
+                  path="/dashboard/:id/"
                   component={Reviews}
+                  
+                />
+                <Route
+
+                  path="/dashboard/:id/:code"
+                  component={Graph}
                   
                 />
             <Redirect to="/dashboard"/>

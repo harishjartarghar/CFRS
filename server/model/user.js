@@ -16,6 +16,12 @@ const UserSchema=mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:"Course"
     }
+    ],
+    submission:[
+       {
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Review",
+    }   
     ]   
 });
 
