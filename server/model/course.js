@@ -20,7 +20,13 @@ const CourseSchema=mongoose.Schema({
         type:Date,
         default:Date.now
     },
-    invite:String
+    invite:String,
+    reviews:[
+    {
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Review",
+    }
+    ]
 });
 
 const Course=mongoose.model('Course',CourseSchema);

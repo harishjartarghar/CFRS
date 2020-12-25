@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles({
   root: {
-    minWidth: 275,
+    minHeight: 200,
   }
 });
 
@@ -16,7 +16,7 @@ export default function CARD(props) {
   const classes = useStyles();
 
   return (
-    <Card className={classes.root}>
+    <Card className={classes.root} style={{...props.style}}>
       <CardContent style={{textAlign:"center"}}>
         {props.children}
       </CardContent>

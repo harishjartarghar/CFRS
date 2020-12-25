@@ -43,11 +43,11 @@ const [open3,setOpen3]=useState(false);
           props.course.course.map(item=>{
             return (
               <Grid item xs={12} sm={12} md={3} key={item.code}>
-                <Card  className={classes.background} onClick={()=>{props.history.push("/dashboard/"+item.code)}}>
-                  <CArdHeader  color="danger">
+                <Card  className={classes.background} >
+                  <CArdHeader  color="danger"  onClick={()=>{props.history.push("/dashboard/"+item.code)}}>
                     <img  style={{maxheight:"100%",maxWidth:"100%"}} src="https://img.freepik.com/free-vector/empty-school-class-conference-background_23-2148701192.jpg?size=626&ext=jpg"/>
                   </CArdHeader>
-                  <CardBody>
+                  <CardBody onClick={()=>{props.history.push("/dashboard/"+item.code)}}>
                     <h4 className={classes.cardTitle}>Course Name : {item.name}</h4>
                     <p className={classes.cardCategory}>Course Code : {item.code}</p>
                   </CardBody>

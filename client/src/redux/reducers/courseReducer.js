@@ -1,6 +1,9 @@
 const initialState = {
     course:[],
-    join:false
+    join:false,
+    review:[],
+    submission:[],
+    data:[]
 };
 
 const authReducers=(state={...initialState},actions)=>{
@@ -15,6 +18,12 @@ const authReducers=(state={...initialState},actions)=>{
                 ...state,
                 course:actions.course
             }
+        case 'GET_REVIEW':
+            return{
+                ...state,
+                review:actions.review,
+                submission:actions.submission
+            }
 
         case 'INVITE':
             return{
@@ -25,6 +34,16 @@ const authReducers=(state={...initialState},actions)=>{
                 ...state,
                 join:true,
                 detail:actions.course
+            }
+        case 'NEW_REVIEW':
+            return{
+                ...state,
+                review:[actions.review,...state.review]
+            }
+        case 'GET_DATA':
+            return{
+                ...state,
+                data:actions.data
             }
         
         default:
