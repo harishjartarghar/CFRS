@@ -24,8 +24,11 @@ var newUser;
    const user=await User.findOne({email:email});
    if(user) return res.status(400).json({message: 'Email is Already Registered'});
 
-   const user2=await User.findOne({usn:usn});
+   if(!isTeacher)
+   {
+    const user2=await User.findOne({usn:usn});
    if(user2) return res.status(400).json({message: 'USN is Already Registered'});
+   }
 
    //hashing password
      const salt=await bcrypt.genSalt(12);
